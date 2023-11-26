@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use App\Domain\User\Address\Address;
 use JsonSerializable;
 
 class User implements JsonSerializable
 {
-    private ?int $id;
+    private ?Address $address;
 
-    private string $username;
-
-    private string $firstName;
-
-    private string $lastName;
-
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
-    {
+    public function __construct(
+        private ?int $id,
+        private string $username,
+        private string $firstName,
+        private string $lastName
+    ) {
         $this->id = $id;
         $this->username = strtolower($username);
         $this->firstName = ucfirst($firstName);
@@ -52,6 +51,7 @@ class User implements JsonSerializable
             'username' => $this->username,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
+            'address' => $this->address?->jsonSerialize() ?? null,
         ];
     }
 }

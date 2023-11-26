@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Domain\User\Address\Address" table="users_addresses">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO" />
+    </id>
+    <field name="street" type="string" column="street" length="255" />
+    <field name="city" type="string" column="city" length="255" />
+    <field name="zipCode" type="string" column="zip_code" length="255" />
+    <field name="country" type="string" column="country" length="255" />
+    <one-to-one field="user" target-entity="App\Domain\User\User" inversed-by="address" />
+  </entity>
+</doctrine-mapping>
