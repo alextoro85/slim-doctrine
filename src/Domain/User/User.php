@@ -43,6 +43,11 @@ class User implements JsonSerializable
         return $this->lastName;
     }
 
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
     #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {

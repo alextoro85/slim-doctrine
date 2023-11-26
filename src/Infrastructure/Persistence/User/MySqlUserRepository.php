@@ -55,6 +55,9 @@ class MySqlUserRepository implements UserRepository
      */
     public function delete(User $user): void
     {
+        if ($user->getAddress() !== null) {
+            $this->entityManager->remove($user->getAddress());
+        }
         $this->entityManager->remove($user);
         $this->entityManager->flush();
     }
