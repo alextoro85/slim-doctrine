@@ -32,6 +32,7 @@ class MySqlUserRepository implements UserRepository
      */
     public function findUserOfId(int $id): User
     {
+        $this->entityManager->clear(); //TO EAGER WORK BEFORE SAVE
         $user = $this->repository->find($id);
 
         if (!$user instanceof User) {

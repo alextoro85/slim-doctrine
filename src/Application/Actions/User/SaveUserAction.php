@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\User;
 
+use App\Domain\User\Address\Address;
 use App\Domain\User\User;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -28,6 +29,24 @@ class SaveUserAction extends UserAction
             return $this->respondWithData('Username already exists', 400);
         } catch (\Exception $e) {
             return $this->respondWithData('Something went wrong on saving user', 400);
+        }
+
+        if (isset($userData['address'])) {
+            try {
+                $address = new Address(
+                    null,
+                    $user,
+                    $userData['address']['street'],
+                    $userData['address']['number'],
+                    $userData['address']['city'],
+                    $userData['address']['country']
+                );
+                $this->addressRepository->save($address);
+
+                $user = $this->userRepository->findUserOfId($user->getId());
+            } catch (\Exception $e) {
+                return $this->respondWithData('Something went wrong on saving address', 400);
+            }
         }
 
         $this->logger->info("User of id {$user->getId()} was saved.");
