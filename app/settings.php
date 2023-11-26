@@ -21,6 +21,21 @@ return function (ContainerBuilder $containerBuilder) {
                     'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
                     'level' => Logger::DEBUG,
                 ],
+                'doctrine' => [
+                    'dev_mode' => true,
+                    'cache_dir' => __DIR__ . '/../var/doctrine',
+                    'metadata_dirs' => [__DIR__ . '/../src/Domain'],
+                    'xml_mapping_dir' => [__DIR__ . '/../app/doctrine'],
+                    'connection' => [
+                        'driver' => 'pdo_mysql',
+                        'host' => 'localhost',
+                        'port' => 3306,
+                        'dbname' => 'slim_doctrine',
+                        'user' => 'root',
+                        'password' => 'toor1234',
+                        'charset' => 'utf8mb4'
+                    ]
+                ]
             ]);
         }
     ]);
