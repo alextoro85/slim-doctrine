@@ -48,4 +48,20 @@ class InMemoryUserRepository implements UserRepository
 
         return $this->users[$id];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save(User $user): void
+    {
+        $this->users[$user->getId()] = $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(User $user): void
+    {
+        unset($this->users[$user->getId()]);
+    }
 }

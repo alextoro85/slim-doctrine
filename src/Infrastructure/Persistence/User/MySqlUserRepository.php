@@ -40,4 +40,22 @@ class MySqlUserRepository implements UserRepository
 
         return $user;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save(User $user): void
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(User $user): void
+    {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
 }

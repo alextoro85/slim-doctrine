@@ -4,7 +4,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO" />
     </id>
-    <field name="username" type="string" column="username" length="255" />
+    <field name="username" type="string" column="username" length="255" unique="true" />
     <field name="firstName" type="string" column="first_name" length="255" />
     <field name="lastName" type="string" column="last_name" length="255" />
    </entity>
