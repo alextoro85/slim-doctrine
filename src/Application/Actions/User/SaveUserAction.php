@@ -19,6 +19,16 @@ class SaveUserAction extends UserAction
 
         try {
             $user = new User(null, $userData['username'], $userData['firstName'], $userData['lastName']);
+            if (isset($userData['address'])) {
+                    $address = new Address(
+                        null,
+                        $userData['address']['street'],
+                        $userData['address']['number'],
+                        $userData['address']['city'],
+                        $userData['address']['country']
+                    );
+                    $user->setAddress($address);
+            }
         } catch (\Exception $e) {
             return $this->respondWithData($e->getMessage(), 400);
         }
@@ -31,23 +41,7 @@ class SaveUserAction extends UserAction
             return $this->respondWithData('Something went wrong on saving user', 400);
         }
 
-        if (isset($userData['address'])) {
-            try {
-                $address = new Address(
-                    null,
-                    $user,
-                    $userData['address']['street'],
-                    $userData['address']['number'],
-                    $userData['address']['city'],
-                    $userData['address']['country']
-                );
-                $this->addressRepository->save($address);
 
-                $user = $this->userRepository->findUserOfId($user->getId());
-            } catch (\Exception $e) {
-                return $this->respondWithData('Something went wrong on saving address', 400);
-            }
-        }
 
         $this->logger->info("User of id {$user->getId()} was saved.");
 

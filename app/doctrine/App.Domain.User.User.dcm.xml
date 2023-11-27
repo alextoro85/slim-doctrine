@@ -7,6 +7,10 @@
     <field name="username" type="string" column="username" length="255" unique="true" />
     <field name="firstName" type="string" column="first_name" length="255" />
     <field name="lastName" type="string" column="last_name" length="255" />
-    <one-to-one field="address" target-entity="App\Domain\User\Address\Address" mapped-by="user" fetch="EAGER" />
+    <one-to-one field="address" target-entity="App\Domain\User\Address\Address" mapped-by="user" fetch="EAGER">
+      <cascade>
+        <cascade-all />
+      </cascade>
+    </one-to-one>
    </entity>
 </doctrine-mapping>

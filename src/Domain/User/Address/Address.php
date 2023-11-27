@@ -9,9 +9,10 @@ use JsonSerializable;
 
 class Address implements JsonSerializable
 {
+    private ?User $user;
+
     public function __construct(
         private ?int $id,
-        private User $user,
         private string $street,
         private string $city,
         private string $country,
@@ -42,6 +43,11 @@ class Address implements JsonSerializable
     public function getZipCode(): string
     {
         return $this->zipCode;
+    }
+
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 
     #[\ReturnTypeWillChange]

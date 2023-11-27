@@ -48,6 +48,12 @@ class User implements JsonSerializable
         return $this->address;
     }
 
+    public function setAddress(Address $address): void
+    {
+        $this->address = $address;
+        $this->address->setUser($this);
+    }
+
     #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {
