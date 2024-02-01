@@ -28,7 +28,7 @@
         "php-di/php-di": "^6.4",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10",
-        "doctrine/orm": "^2.11.0",
+        "doctrine/orm": "^2.17.4",
         "doctrine/dbal": "^3.2",
         "symfony/yaml": "^5.4",
         "symfony/cache": "^5.4"
